@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Dec  8 20:13:28 2019
+
+@author: Joaquin
+"""
+
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+import cmath as cm
+
+#Variables
+h = float(input('Enter Initial Height: '))
+vo = float(input('Enter Velocity(m/s): '))
+ang = float(input('Enter the angle in degrees from the x-axis: '))
+ax = float(input('Enter the acceleration in x-component: '))
+ay= float(input('Enter the acceleration in y-component: '))
+
+if ay == 0: #for the error
+    sys.exit('error! there will be no free fall if the acceleration in the y-axis is equal to zero.')
+    
+d = cm.sqrt((vo*np.sin(ang))**2 - 4*(1/2*ay)*h) 
+       
+tmax = (-vo*np.sin(ang)+d)/ay
+    
+t= np.linspace(0,tmax) 
+    
+if tmax <= 0:
+    tmax = (-vo*np.sin(ang)-d)/ay
+    
+t= np.linspace(0,tmax) 
+    
+x = vo*np.cos(ang)*(t) + (1/2)*(ax)*(t)**2 
+xi= vo*np.cos(ang)*t 
+y = h+vo*np.sin(ang)*(t) + (1/2)*(ay)*(t)**2 
+
+plt.title('Problem 4: Projectile Motion')
+plt.xlabel('range')
+plt.ylabel('height')
+plt.grid()
+plt.plot(x,y, label="Actual")
+plt.plot(xi,y,'.r', label="Ideal")
+plt.legend(loc="upper left")
+plt.show()
