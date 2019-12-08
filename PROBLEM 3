@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Dec  7 15:36:14 2019
+
+@author: Joaquin
+"""
+
+def f(x):
+    result = x**2+x+1 # can be modified to accomodate aany function
+    return result
+
+def least_norm_err_vec(exp_points,n):
+    err_arr=[0]*n #blank array of errors
+    for i in range(0,n):
+        err_arr[i]=exp_points[i][1] - f(exp_points[i][0])
+    return err_arr
+
+#code to take input and then display the error array
+
+n=int(input("Enter number of experiment points you wish to input:"))
+exp_points=[] #blank array of zeros
+
+print("Now enter the data point in order pairs (x,y) - x first then y and hit enter after each pair:")
+for i in range(0,n):
+    exp_points.append([int(j) for j in input("Enter two value: ").split()])
+
+#call the error function and display the result
+err_arr = least_norm_err_vec(exp_points,n)
+print("Error array is below:\n")
+print(err_arr)
